@@ -1,4 +1,7 @@
 import os
+import random
+from variavelsalas import salas
+
 def v_opcao():
     while True:
         opcao = input('[i]nserir [a]pagar [l]istar [f]inalizar ')
@@ -18,18 +21,23 @@ def v_sala():
                 return sala-1
             else:
                 os.system('cls')
-                print('Sala não encotrada')
-                continue
+            print('Sala não encontrada')
+            continue
         except ValueError or TypeError:
             os.system('cls')
             print('Sala não encontrada')
-
+            continue
 
 def v_aluno():
     while True:
-        nome = input('Digite o nome do aluno: ')
-        if not any(char.isdigit() for char in nome):
-            return nome
+        aluno = input('Digite o nome do aluno: ')
+        if not any(char.isdigit() for char in aluno):
+            while True:
+                cod_aluno = random.randint(1000,9999)
+                if cod_aluno not in salas:
+                    return {'nome': aluno, 'codigo':cod_aluno}
+                else:
+                    continue
         else:
             os.system('cls')
             print('Nome do aluno não pode conter números')
